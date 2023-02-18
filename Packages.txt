@@ -1,0 +1,35 @@
+/* Instala no projeto o Framework de Acesso a Banco de Dados*/
+dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0.2
+
+/* Adiciona ao projeto o Pacote que Permite o uso da Ferramenta Migrations */
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0.14
+
+/* Instala no PC a ferramenta EF do Entity Framework, caso ainda não possua */
+dotnet tool install --global dotnet-ef
+
+/* Usando a ferramenta EF - Cria uma migração com nome especificado na pasta Migrations */
+dotnet ef migrations add criar-banco --output-dir Migrations
+
+/* Aplica a Migração criada no banco de dados */
+dotnet ef database update
+
+/* Instala no PC a ferramenta de geração de código do ASP.NET */
+dotnet tool install -g dotnet-aspnet-codegenerator --version 6.0.12
+
+/* Adiciona ao projeto os pacotes necessários para utilizar a ferramenta de geração de código */
+dotnet add package Microsoft.VisualStudio.Web.CodeGenerators.Mvc --version 6.0.12
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 6.0.12
+
+/* Adiciona ao projeto os pacotes necessários para utilizar o Framework Identity, para criação e gerenciamento de usuários */
+dotnet add package Microsoft.EntityFrameworkCore --version 6.0.14
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 6.0.14
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore --version 6.0.14
+dotnet add package Microsoft.AspNetCore.Identity.UI --version 6.0.14
+dotnet add package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore --version 6.0.14
+
+/* Usa o gerador de código para criação uma partial View auxiliar */
+dotnet-aspnet-codegenerator view _LoginPartial Empty -outDir "Views/Shared"
+
+
+/* Faz o Scaffolding das Paginas Razor de Identidade (Login, registro e demais) */
+dotnet aspnet-codegenerator identity -dc NomeProjeto.Data.NomeContexto
